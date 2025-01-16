@@ -32,7 +32,7 @@ namespace Assignment2.Model
             }
         }
 
-        public void StartGame(GameGrid grid)
+        public async Task StartGame(GameGrid grid)
         {
             grid.UpdateBoard(Board.BoardState);
             while (Board.GameOver() == false)
@@ -42,12 +42,12 @@ namespace Assignment2.Model
                     //Creating a list of valid moves for the curent player
                     List<(int x, int y)> ValidMoves = Board.GetValidMoves(CurrentPlayer.Disk);
 
-                    (int x, int y) tempMove = CurrentPlayer.RequestMove(Board, ValidMoves);
+                    (int x, int y) tempMove = await CurrentPlayer.RequestMove(Board, ValidMoves);
 
                     //Making sure that a valid move is chose, if not a new move is requested until it is valid
                     while (Board.IsValidMove(tempMove.x, tempMove.y, CurrentPlayer.Disk) == false)
                     {
-                        tempMove = CurrentPlayer.RequestMove(Board, ValidMoves);
+                        tempMove = await CurrentPlayer.RequestMove(Board, ValidMoves);
                     }
 
                     (int x, int y) chosenMove = tempMove;

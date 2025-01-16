@@ -18,7 +18,7 @@ namespace Assignment2.Model
             this.Disk = disk;
         }
 
-        public abstract (int x, int y) RequestMove(GameBoard board, List<(int x, int y)> validMoves);
+        public abstract Task<(int x, int y)> RequestMove(GameBoard board, List<(int x, int y)> validMoves);
    
     }
 
